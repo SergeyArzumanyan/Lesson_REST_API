@@ -83,17 +83,17 @@ export const updateProductById = async (req: Request, res: Response) => {
 
         const existingProduct: IProduct = products[idx];
 
-        // if (updatedProduct?.stock?.available) {
-        //     if (updatedProduct.stock.available < 0 || !Number.isInteger(updatedProduct.stock.available)) {
-        //         res.status(HttpStatus.NOT_ACCEPTABLE).json({ message: 'Stock.available must be a non-negative integer.' });
-        //         return;
-        //     }
-        // }
-        //
-        // if (updatedProduct?.price && updatedProduct?.price < 0) {
-        //     res.status(HttpStatus.NOT_ACCEPTABLE).json({ message: 'Price must not be negative.' });
-        //     return;
-        // }
+        if (updatedProduct?.stock?.available) {
+            if (updatedProduct.stock.available < 0 || !Number.isInteger(updatedProduct.stock.available)) {
+                res.status(HttpStatus.NOT_ACCEPTABLE).json({ message: 'Stock.available must be a non-negative integer.' });
+                return;
+            }
+        }
+
+        if (updatedProduct?.price && updatedProduct?.price < 0) {
+            res.status(HttpStatus.NOT_ACCEPTABLE).json({ message: 'Price must not be negative.' });
+            return;
+        }
 
         const updatedProductData: IProduct = {
             ...existingProduct,

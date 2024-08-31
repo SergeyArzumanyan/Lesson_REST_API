@@ -1,0 +1,34 @@
+####
+GET http://localhost:3001/products
+
+####
+POST http://localhost:3001/products HTTP/1.1
+content-type: application/json
+
+{
+  "name": "New product name",
+  "description": "Test -----",
+  "price": 1234,
+  "category": "category test ---",
+  "stock": {
+    "available": 55,
+    "reserved": 4321,
+    "location": "Testing location ..."
+  },
+  "tags": ["a", "b", "c", "d"],
+  "rating": 5
+}
+
+####
+GET http://localhost:3001/products/101
+
+####
+PUT http://localhost:3001/products/101
+content-type: application/json
+
+{
+  "name": "Updated product name"
+}
+
+####
+DELETE http://localhost:3001/products/101
